@@ -1,2 +1,10 @@
 node_modules/
 *.local
+node_modules/
+*.local
+*.tgz
+.env
+.env.*
+!.env.example
+coverage/
+.DS_Store

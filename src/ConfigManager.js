@@ -37,6 +37,15 @@ class ConfigManager {
     const sectionData = this._raw[this.section] || {};
     const merged = this._deepMerge({}, globals, sectionData);
 
+    const missingEnvVars = this._findMissingEnvVars(merged);
+    if (missingEnvVars.length) {
+      throw new Error(
+        `ConfigManager: Missing required environment variables for section "${this.section}":\n` +
+        missingEnvVars.map(name => `  - ${name}`).join('\n') +
+        '\nSet these variables in the runtime environment or config/.env.'
+      );
+    }
+
     this._data = this._resolveAll(merged, merged, globals);
     this._bindAttributes();
   }
@@ -79,6 +88,20 @@ class ConfigManager {
       }
     }
     return target;
+  }
+
+  _findMissingEnvVars(value, missing = new Set()) {
+    if (typeof value === 'string') {
+      for (const match of value.matchAll(/\$\{([^}]+)\}/g)) {
+        const name = match[1].trim();
+        if (process.env[name] === undefined) missing.add(name);
+      }
+    } else if (Array.isArray(value)) {
+      for (const item of value) this._findMissingEnvVars(item, missing);
+    } else if (value && typeof value === 'object') {
+      for (const item of Object.values(value)) this._findMissingEnvVars(item, missing);
+    }
+    return [...missing].sort();
   }
 
   _resolveAll(obj, sectionData, globals) {

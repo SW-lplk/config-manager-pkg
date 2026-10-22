@@ -1,5 +1,5 @@
 {
-  "name": "js-config-manager",
+  "name": "@sw-lplk/config-manager",
   "version": "1.0.0",
   "description": "Hierarchical config loader for Node.js — per-env sections, cross-references, .env loading",
   "main": "src/index.js",
@@ -7,5 +7,12 @@
     "test": "node --test tests/ConfigManager.test.js"
   },
   "keywords": ["config", "configuration", "dotenv", "env"],
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/southway-group/js-config-manager.git"
+  }
 }

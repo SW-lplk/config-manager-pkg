@@ -117,3 +117,33 @@ test('config/.env file is loaded without overwriting existing env vars', () => {
 
   delete process.env._CM_DOT_ENV_VAR;
 });
+
+test('throws with all missing ${ENV_VAR} names when env vars are absent', () => {
+  const dir = makeTempConfig({
+    development: {
+      a: '${_CM_MISSING_ONE}',
+      nested: { b: '${_CM_MISSING_TWO}' },
+    },
+  });
+
+  delete process.env._CM_MISSING_ONE;
+  delete process.env._CM_MISSING_TWO;
+
+  assert.throws(
+    () => new ConfigManager({ section: 'development', startDir: dir }),
+    (err) => {
+      assert.ok(err.message.includes('_CM_MISSING_ONE'), 'should list first missing var');
+      assert.ok(err.message.includes('_CM_MISSING_TWO'), 'should list second missing var');
+      return true;
+    },
+  );
+});
+
+test('does not throw when all referenced ${ENV_VAR}s are present', () => {
+  process.env._CM_PRESENT_VAR = 'here';
+  const dir = makeTempConfig({ development: { val: '${_CM_PRESENT_VAR}' } });
+
+  assert.doesNotThrow(() => new ConfigManager({ section: 'development', startDir: dir }));
+
+  delete process.env._CM_PRESENT_VAR;
+});
