@@ -1,0 +1,53 @@
+name: Build and publish @sw-lplk/config-manager
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - develop
+      - staging
+      - production
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://npm.pkg.github.com
+          scope: '@sw-lplk'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build package
+        run: npm run build
+
+      - name: Run tests
+        run: node --test tests/*.test.cjs
+
+      - name: Inspect package contents
+        run: npm pack --dry-run
+
+      - name: Bump prerelease version (staging only)
+        if: github.ref == 'refs/heads/staging'
+        run: npm version prerelease --preid=staging.${{ github.run_number }} --no-git-tag-version
+
+      - name: Publish staging package
+        if: github.ref == 'refs/heads/staging'
+        run: npm publish --tag staging
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish production package
+        if: github.ref == 'refs/heads/production'
+        run: npm publish --tag latest
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
