@@ -1,4 +1,4 @@
-# js-config-manager
+# @sw-lplk/config-manager
 
 Lightweight hierarchical config loader for Node.js — per-environment sections, cross-references, `.env` loading, and `process.env` interpolation.
 
@@ -31,9 +31,9 @@ Node.js equivalent of [config-manager](https://github.com/lukaszplk/config-manag
 ## Installation
 
 ```bash
-npm install js-config-manager
+npm install github:SW-lplk/config-manager-pkg#develop
 # or local:
-npm install file:../js-config-manager
+npm install file:../config-manager-pkg
 ```
 
 ---
@@ -84,7 +84,7 @@ your-project/
 ## Usage
 
 ```js
-const ConfigManager = require('js-config-manager');
+const ConfigManager = require('@sw-lplk/config-manager');
 
 // Walks up from __dirname to find config/config.json
 // Section defaults to process.env.NODE_ENV || 'development'
