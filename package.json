@@ -7,7 +7,8 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "npm run build && node --test tests/*.test.cjs",
-    "prepublishOnly": "npm test"
+    "prepublishOnly": "npm test",
+    "prepare": "npm run build"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -27,14 +28,16 @@
       "default": "./dist/env.js"
     }
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SW-lplk/js-config-manager.git"
+    "url": "git+https://github.com/SW-lplk/config-manager-pkg.git"
   },
-  "keywords": ["config", "configuration", "dotenv", "env"],
+  "keywords": [
+    "config",
+    "configuration",
+    "dotenv",
+    "env"
+  ],
   "engines": {
     "node": ">=20"
   },
