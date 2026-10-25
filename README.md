@@ -5,10 +5,10 @@ Lightweight hierarchical config loader for Node.js — per-environment sections,
 ## Install
 
 ```bash
-npm install github:southway-group/js-config-manager
+npm install github:SW-lplk/config-manager-pkg#v1.0.0
 ```
 
-> Coming to npm as `js-config-manager` soon.
+> Install from the GitHub repository at a version tag.
 
 Node.js equivalent of [config-manager](https://github.com/lukaszplk/config-manager).
 
@@ -130,3 +130,4 @@ const prodConfig = new ConfigManager({ section: 'production', startDir: __dirnam
 ## License
 
 MIT
+
