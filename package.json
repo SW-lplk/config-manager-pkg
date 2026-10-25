@@ -4,8 +4,18 @@
   "description": "Hierarchical config loader for Node.js — per-env sections, cross-references, .env loading",
   "main": "src/index.js",
   "scripts": {
-    "test": "node --test tests/ConfigManager.test.js"
+    "test": "node --test tests/ConfigManager.test.js",
+    "prepare": "npm run build"
   },
-  "keywords": ["config", "configuration", "dotenv", "env"],
-  "license": "MIT"
+  "keywords": [
+    "config",
+    "configuration",
+    "dotenv",
+    "env"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SW-lplk/config-manager-pkg.git"
+  }
 }
