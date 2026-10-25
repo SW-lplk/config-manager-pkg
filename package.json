@@ -1,6 +1,6 @@
 {
-  "name": "js-config-manager",
-  "version": "1.0.0",
+  "name": "@sw-lplk/config-manager",
+  "version": "1.0.1",
   "description": "Hierarchical config loader for Node.js — per-env sections, cross-references, .env loading",
   "main": "src/index.js",
   "scripts": {
