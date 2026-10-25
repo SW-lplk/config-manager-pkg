@@ -5,7 +5,7 @@ Lightweight hierarchical config loader for Node.js — per-environment sections,
 ## Install
 
 ```bash
-npm install github:SW-lplk/config-manager-pkg#v1.0.0
+npm install github:SW-lplk/config-manager-pkg#v1.0.1
 ```
 
 > Install from the GitHub repository at a version tag.
