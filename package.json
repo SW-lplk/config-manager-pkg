@@ -1,11 +1,36 @@
 {
   "name": "@sw-lplk/config-manager",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Hierarchical config loader for Node.js — per-env sections, cross-references, .env loading",
-  "main": "src/index.js",
+  "license": "MIT",
+  "type": "commonjs",
   "scripts": {
-    "test": "node --test tests/ConfigManager.test.js",
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test tests/*.test.cjs",
+    "prepublishOnly": "npm test",
     "prepare": "npm run build"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./env": {
+      "types": "./dist/env.d.ts",
+      "require": "./dist/env.js",
+      "default": "./dist/env.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SW-lplk/config-manager-pkg.git"
   },
   "keywords": [
     "config",
@@ -13,9 +38,11 @@
     "dotenv",
     "env"
   ],
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SW-lplk/config-manager-pkg.git"
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
   }
 }
